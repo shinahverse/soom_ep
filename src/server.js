@@ -1,3 +1,5 @@
+import http from "http";
+import WebSocket from "ws";
 import express from 'express';
 
 const app = express();
@@ -10,4 +12,8 @@ app.get("/", (req,res)=> res.render("home"));
 app.get("/*", (req,res)=>res.redirect("/"));
 
 const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");
-app.listen(3000, handleListen);
+//app.listen(3000, handleListen);
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+
+server.listen(3000, handleListen);
