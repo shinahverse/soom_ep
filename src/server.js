@@ -12,14 +12,14 @@ app.get("/", (req,res)=> res.render("home"));
 app.get("/*", (req,res)=>res.redirect("/"));
 
 const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");
-//app.listen(3000, handleListen);
+
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
 
-function handleConnection(socket){
-    console.log(socket);
-}
-
-wss.on("connection", handleConnection);
+wss.on("connection", (socket) =>{
+    // console.log(socket);
+    console.log("서버와 연결되었습니다.");
+    socket.send("안녕?");
+});
 
 server.listen(3000, handleListen);
