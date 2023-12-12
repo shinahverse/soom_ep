@@ -11,3 +11,7 @@ socket.addEventListener("message", (message)=>{
 socket.addEventListener("close", ()=>{
     console.log("서버와 연결이 끊겼습니다.");
 })
+
+setTimeout(()=>{
+    socket.send("[브라우저] 안녕");
+}, 3000);
