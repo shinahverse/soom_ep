@@ -5,7 +5,7 @@ socket.addEventListener("open", ()=>{
 })
 
 socket.addEventListener("message", (message)=>{
-    console.log("방금 받은 메시지: ", message);
+    console.log("서버로부터 받은 메시지: ", message.data);
 })
 
 socket.addEventListener("close", ()=>{
