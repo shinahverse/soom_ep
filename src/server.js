@@ -17,11 +17,11 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
 
 wss.on("connection", (socket) =>{
-    // console.log(socket);
     console.log("서버와 연결되었습니다.");
     socket.on("close", ()=> console.log("브라우저와 연결이 끊겼습니다."));
-    socket.on("message", (message)=>{console.log(`${message}`);});
-    socket.send("[서버] 안녕?");
+    socket.on("message", (message)=>{
+        socket.send(`[서버] ${message}`);
+    });
 });
 
 
