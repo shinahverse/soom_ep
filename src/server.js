@@ -16,11 +16,14 @@ const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
 
+const sockets = []
 wss.on("connection", (socket) =>{
+    sockets.push(socket);
     console.log("서버와 연결되었습니다.");
     socket.on("close", ()=> console.log("브라우저와 연결이 끊겼습니다."));
     socket.on("message", (message)=>{
-        socket.send(`[서버] ${message}`);
+        // socket.send(`[서버] ${message}`);
+        sockets.forEach(aSocket => aSocket.send(`${message}`));
     });
 });
 
