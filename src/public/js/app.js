@@ -18,10 +18,16 @@ socket.addEventListener("close", ()=>{
     console.log("서버와 연결이 끊겼습니다.");
 });
 
+function makeMessage(type, payload){
+    const msg = {type, payload};
+    return JSON.stringify(msg);
+};
+
 function handleSubmit(event){
     event.preventDefault();
     const input = messageForm.querySelector("input");
-    socket.send(input.value);
+    // socket.send(input.value);
+    socket.send(makeMessage("message", input.value));
     input.value = "";
 };
 
@@ -29,10 +35,7 @@ function handleSubmitNick(event){
     event.preventDefault();
     const input = nickForm.querySelector("input");
     // socket.send(input.value);
-    socket.send({
-        type: "nickname",
-        payload: input.value
-    });
+    socket.send(makeMessage("nickname", input.value));
     input.value = "";
 };
 
