@@ -19,12 +19,22 @@ const wss = new WebSocket.Server({server});
 const sockets = []
 wss.on("connection", (socket) =>{
     sockets.push(socket);
+    socket["nickname"] = "익명";
     console.log("서버와 연결되었습니다.");
     socket.on("close", ()=> console.log("브라우저와 연결이 끊겼습니다."));
     socket.on("message", (msg)=>{
         const message = JSON.parse(msg);
-        console.log(message.type, message.payload);
-        sockets.forEach(aSocket => aSocket.send(`${message}`));
+        // console.log(message.type, message.payload);
+        // sockets.forEach(aSocket => aSocket.send(`${message}`));
+        switch (message.type) {
+            case "nickname":
+                socket["nickname"] = message.payload
+                break;
+        
+            case "newMessage":
+                sockets.forEach(aSocket => aSocket.send(`${message.payload}`));
+                break;
+        }
     });
 });
 
