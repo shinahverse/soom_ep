@@ -21,8 +21,9 @@ wss.on("connection", (socket) =>{
     sockets.push(socket);
     console.log("서버와 연결되었습니다.");
     socket.on("close", ()=> console.log("브라우저와 연결이 끊겼습니다."));
-    socket.on("message", (message)=>{
-        // socket.send(`[서버] ${message}`);
+    socket.on("message", (msg)=>{
+        const message = JSON.parse(msg);
+        console.log(message.type, message.payload);
         sockets.forEach(aSocket => aSocket.send(`${message}`));
     });
 });
