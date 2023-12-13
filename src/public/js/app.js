@@ -28,7 +28,11 @@ function handleSubmit(event){
 function handleSubmitNick(event){
     event.preventDefault();
     const input = nickForm.querySelector("input");
-    socket.send(input.value);
+    // socket.send(input.value);
+    socket.send({
+        type: "nickname",
+        payload: input.value
+    });
     input.value = "";
 };
 
