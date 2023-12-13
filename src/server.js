@@ -32,7 +32,7 @@ wss.on("connection", (socket) =>{
                 break;
         
             case "newMessage":
-                sockets.forEach(aSocket => aSocket.send(`${message.payload}`));
+                sockets.forEach(aSocket => aSocket.send(`[${socket.nickname}] ${message.payload}`));
                 break;
         }
     });
