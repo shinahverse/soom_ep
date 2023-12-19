@@ -34,3 +34,7 @@ form.addEventListener("submit", handleSubmitRoom);
 socket.on("welcome", ()=>{
     writeMessage("누군가 들어왔습니다.");
 });
+
+socket.on("bye", () => {
+    writeMessage("누군가 나갔습니다.");
+});
