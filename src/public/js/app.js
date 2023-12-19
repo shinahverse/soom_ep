@@ -22,4 +22,15 @@ function handleSubmitRoom(event){
     input.value = "";
 };
 
+function writeMessage(message){
+    const ul = room.querySelector("ul");
+    const li = document.createElement("li");
+    li.innerText = message;
+    ul.appendChild(li);
+}
+
 form.addEventListener("submit", handleSubmitRoom);
+
+socket.on("welcome", ()=>{
+    writeMessage("누군가 들어왔습니다.");
+});
