@@ -15,7 +15,8 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket)=>{
-    console.log(socket);
+    // console.log(socket);
+    socket.on("enterRoom", (roomName)=> console.log(roomName));
 });
 
 const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");

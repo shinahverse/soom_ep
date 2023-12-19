@@ -11,6 +11,10 @@ html(lan="en")
             h1 SOOM
         main 
             h2 SOOM에 오신 것을 환영합니다.
+            div#welcome
+                form
+                    input(type="text", placeholder="방이름", required)
+                    button 채팅룸 입장
 
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
