@@ -24,6 +24,12 @@ wsServer.on("connection", (socket)=>{
     socket.on("disconnecting", ()=>{
         socket.rooms.forEach(room => socket.to(room).emit("bye"));
     });
+
+    socket.on("newMessage", (msg, room, done) => {
+        socket.to(room).emit("newMessage", msg);
+        done();
+    });
+
 });
 
 const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");
