@@ -15,6 +15,10 @@ html(lan="en")
                 form
                     input(type="text", placeholder="방이름", required)
                     button 채팅룸 입장
-
+            div#room 
+                ul 
+                form
+                    input(type="text", placeholder="메시지", required)
+                    button 보내기
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")

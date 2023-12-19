@@ -2,14 +2,18 @@ const socket = io();
 
 const welcome = document.getElementById("welcome");
 const form = welcome.querySelector("form");
+const room = document.getElementById("room");
+room.hidden = true;
+
+function showRoom(){
+    welcome.hidden = true;
+    room.hidden = false;
+}
 
 function handleSubmitRoom(event){
     event.preventDefault();
     const input = form.querySelector("input");
-    // socket.emit("enterRoom", {payload:input.value});
-    socket.emit("enterRoom", input.value, ()=>{
-        console.log("server is done!");
-    });
+    socket.emit("enterRoom", input.value, showRoom);
     input.value = "";
 };
 
