@@ -16,7 +16,12 @@ const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket)=>{
     // console.log(socket);
-    socket.on("enterRoom", (roomName)=> console.log(roomName));
+    socket.on("enterRoom", (roomName, done)=> {
+        console.log(roomName);
+        setTimeout(()=>{
+            done();
+        }, 5000);
+    });
 });
 
 const handleListen = ()=> console.log("서버 대기중 http://localhost:3000");
