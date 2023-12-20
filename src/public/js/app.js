@@ -67,3 +67,6 @@ socket.on("newMessage", (msg)=>{
     writeMessage(msg);
 });
 
+socket.on("changeRoom", (rooms) => {
+    console.log(rooms);
+});

@@ -25,7 +25,7 @@ function publicRooms(){
         }
     } = wsServer;
     //구조 분해 할당
-    
+
     const publicRooms = [];
     //rooms.forEach((value, key) => {
     rooms.forEach((_, key) => {
@@ -48,6 +48,11 @@ wsServer.on("connection", (socket)=>{
         done();
         socket.join(roomName);
         socket.to(roomName).emit("welcome", socket.nickname);
+        wsServer.sockets.emit("changeRoom", publicRooms());
+    });
+
+    socket.on("disconnect", ()=>{
+        wsServer.sockets.emit("changeRoom", publicRooms());
     });
 
     socket.on("disconnecting", ()=>{
