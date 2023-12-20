@@ -68,5 +68,16 @@ socket.on("newMessage", (msg)=>{
 });
 
 socket.on("changeRoom", (rooms) => {
-    console.log(rooms);
+    //console.log(rooms);
+    const roomList = welcome.querySelector("ul");
+    roomList.innerHTML = "";
+    if (rooms.length === 0) {
+        return;
+    }
+
+    rooms.forEach((room) => {
+        const li = document.createElement("li");
+        li.innerText = room;
+        roomList.append(li);
+    });
 });
