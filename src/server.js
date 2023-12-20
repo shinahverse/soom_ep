@@ -15,20 +15,24 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket)=>{
+    socket["nickname"] = "익명";
     socket.on("enterRoom", (roomName, done)=> {
         done();
         socket.join(roomName);
-        socket.to(roomName).emit("welcome");
+        socket.to(roomName).emit("welcome", socket.nickname);
     });
 
     socket.on("disconnecting", ()=>{
-        socket.rooms.forEach(room => socket.to(room).emit("bye"));
+        socket.rooms.forEach(room => 
+            socket.to(room).emit("bye", socket.nickname));
     });
 
     socket.on("newMessage", (msg, room, done) => {
-        socket.to(room).emit("newMessage", msg);
+        socket.to(room).emit("newMessage", `${socket.nickname} : ${msg}`);
         done();
     });
+
+    socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 
 });
 
