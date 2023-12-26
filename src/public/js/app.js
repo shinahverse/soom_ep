@@ -55,11 +55,15 @@ function writeMessage(message){
 
 form.addEventListener("submit", handleSubmitRoom);
 
-socket.on("welcome", (userNickname)=>{
+socket.on("welcome", (userNickname, newCount)=>{
+    const h3 = room.querySelector("h3");
+    h3.innerText = `Room ${roomName} (${newCount})`;
     writeMessage(`${userNickname}님이(가) 입장하였습니다.`);
 });
 
-socket.on("bye", (userNickname) => {
+socket.on("bye", (userNickname, newCount) => {
+    const h3 = room.querySelector("h3");
+    h3.innerText = `Room ${roomName} (${newCount})`;
     writeMessage(`${userNickname}님이(가) 퇴장하였습니다.`);
 });
 
