@@ -14,5 +14,5 @@ app.get("/*", (_,res)=>res.redirect("/"));
 const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
-const handleListen = ()=> console.log("http://localshost:3000 대기중");
+const handleListen = ()=> console.log("http://localhost:3000 대기중");
 httpServer.listen(3000, handleListen);
