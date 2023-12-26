@@ -24,6 +24,7 @@ async function getMedia(){
 
 getMedia();
 function handleMute(){
+    console.log(myStream.getAudioTracks());
     if(!muted){
         btnMute.innerText = "음소거해제";
         muted = true;
@@ -34,6 +35,7 @@ function handleMute(){
 }
 
 function handleCamera() {
+    console.log(myStream.getVideoTracks());
     if (!cameraOff){
         btnCamera.innerText = "카메라 켜짐";
         cameraOff = true;
