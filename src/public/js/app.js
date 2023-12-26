@@ -25,6 +25,9 @@ async function getMedia(){
 getMedia();
 function handleMute(){
     console.log(myStream.getAudioTracks());
+    myStream.getAudioTracks().forEach((track) => {
+        track.enabled = !track.enabled;        
+    });
     if(!muted){
         btnMute.innerText = "음소거해제";
         muted = true;
@@ -36,6 +39,9 @@ function handleMute(){
 
 function handleCamera() {
     console.log(myStream.getVideoTracks());
+    myStream.getVideoTracks().forEach((track)=>{
+        track.enabled = !track.enabled;
+    });
     if (!cameraOff){
         btnCamera.innerText = "카메라 켜짐";
         cameraOff = true;
