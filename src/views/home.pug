@@ -11,7 +11,10 @@ html(lan="en")
             h1 SOOM
         main 
             h2 SOOM에 오신 것을 환영합니다.
-            video#myFace(autoplay, playsinline, width="400", height="400")
+            div#myStream
+                video#myFace(autoplay, playsinline, width="400", height="400")
+                button#mute 음소거
+                button#camera 카메라 끄기
             
         script(src="/socket.io/socket.io.js")
         script(src="/public/js/app.js")
