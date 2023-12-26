@@ -1,0 +1,30 @@
+doctype html
+html(lan="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title SOOM
+        link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+    body
+        header 
+            h1 SOOM
+        main 
+            h2 SOOM에 오신 것을 환영합니다.
+            div#welcome
+                form
+                    input(type="text", placeholder="방이름", required)
+                    button 채팅룸 입장
+                h4 채팅룸 목록: 
+                    ul
+            div#room 
+                h3
+                ul 
+                form#name
+                    input(type="text", placeholder="닉네임", required)
+                    button 저장
+                form#msg
+                    input(type="text", placeholder="메시지", required)
+                    button 보내기
+        script(src="/socket.io/socket.io.js")
+        script(src="/public/js/app.js")
