@@ -14,5 +14,12 @@ app.get("/*", (_,res)=>res.redirect("/"));
 const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
+wsServer.on("connection", (socket)=>{
+    socket.on("joinRoom", (roomName, done)=>{
+        socket.join(roomName);
+        done();
+    });
+});
+
 const handleListen = ()=> console.log("http://localhost:3000 대기중");
 httpServer.listen(3000, handleListen);

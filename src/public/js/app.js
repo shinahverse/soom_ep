@@ -4,10 +4,13 @@ const myFace = document.getElementById("myFace");
 const btnMute = document.getElementById("mute");
 const btnCamera = document.getElementById("camera");
 const selectCamera = document.getElementById("cameras");
+const call = document.getElementById("call");
+
 
 let myStream;
 let muted = false;
 let cameraOff = false;
+
 
 async function getCameras(){
     try {
@@ -53,7 +56,7 @@ async function getMedia(deviceId){
     }
 }
 
-getMedia();
+//getMedia();
 function handleMute(){
     // console.log(myStream.getAudioTracks());
     myStream.getAudioTracks().forEach((track) => {
@@ -87,6 +90,27 @@ async function handleChangeCamera(){
     await getMedia(selectCamera.value);
 }
 
+
 btnMute.addEventListener("click", handleMute);
 btnCamera.addEventListener("click", handleCamera);
-selectCamera.addEventListener("input", handleChangeCamera)
+selectCamera.addEventListener("input", handleChangeCamera);
+
+//welcome form 에 대한 코드
+const welcome = document.getElementById("welcome");
+const wecomeForm = welcome.querySelector("form");
+
+call.hidden = true;
+
+function startMedia(){
+    welcome.hidden = true;
+    call.hidden = false;
+    getMedia();
+}
+
+function handleWelcome(event){
+    event.preventDefault();
+    const input = wecomeForm.querySelector("input");
+    socket.emit("joinRoom", input.value, startMedia);
+    input.value = "";
+}
+wecomeForm.addEventListener("submit", handleWelcome);
