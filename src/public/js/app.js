@@ -108,7 +108,6 @@ async function startMedia(){
     call.hidden = false;
     await getMedia();
     makeConnection();
-
 }
 
 function handleWelcome(event){
@@ -121,11 +120,16 @@ function handleWelcome(event){
 wecomeForm.addEventListener("submit", handleWelcome);
 
 //Socket Code
-socket.on("welcome", ()=>{
-    console.log("누군가 입장했습니다.");
+socket.on("welcome", async()=>{
+    //console.log("누군가 입장했습니다.");
+    const offer = await myPeerConnection.createOffer();
+    console.log(offer);
 });
 
 //RTC Code
 function makeConnection(){
     myPeerConnection =  new RTCPeerConnection();
+    //console.log(myStream.getTracks());
+    myStream.getTracks().forEach(track => myPeerConnection.addTrack(track, myStream));
+
 }
