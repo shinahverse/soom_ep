@@ -10,6 +10,7 @@ const call = document.getElementById("call");
 let myStream;
 let muted = false;
 let cameraOff = false;
+let roomName;
 
 
 async function getCameras(){
@@ -111,6 +112,12 @@ function handleWelcome(event){
     event.preventDefault();
     const input = wecomeForm.querySelector("input");
     socket.emit("joinRoom", input.value, startMedia);
+    roomName = input.value;
     input.value = "";
 }
 wecomeForm.addEventListener("submit", handleWelcome);
+
+//Socket Code
+socket.on("welcome", ()=>{
+    console.log("누군가 입장했습니다.");
+});
