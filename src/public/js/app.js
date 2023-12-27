@@ -25,16 +25,25 @@ async function getCameras(){
     }
 }
 
-async function getMedia(){
+async function getMedia(deviceId){
+    const initialConstraints = {
+        audio : true,
+        video : {facingMode : "user"}
+    };
+    const cameraConstraints = {
+        audio : true,
+        video : {deviceId: {exact: deviceId}}
+    };
     try{
-        myStream = await navigator.mediaDevices.getUserMedia({
-            audio : true,
-            video : true,
-        });
+        myStream = await navigator.mediaDevices.getUserMedia(
+            deviceId ? cameraConstraints : initialConstraints
+        );
     
         //console.log(myStream);
         myFace.srcObject = myStream;
-        await getCameras();
+        if (!deviceId){
+            await getCameras();
+        }
     }catch(e){
         console.log(e);
     }
@@ -68,5 +77,12 @@ function handleCamera() {
         cameraOff = false;
     }
 }
+
+async function handleChangeCamera(){
+    //console.log(selectCamera.value);
+    await getMedia(selectCamera.value);
+}
+
 btnMute.addEventListener("click", handleMute);
 btnCamera.addEventListener("click", handleCamera);
+selectCamera.addEventListener("input", handleChangeCamera)
